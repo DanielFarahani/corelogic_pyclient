@@ -1,7 +1,7 @@
 import requests
-from authorise import Authorise
+from authentication import Authentication
 
-class Auction(Authorise):
+class Auction(Authentication):
 
     def __init__(self, url, headers):
         self.url = url
