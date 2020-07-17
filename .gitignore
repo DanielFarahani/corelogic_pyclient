@@ -1,2 +1,4 @@
-config.py
+app/config.py
 .vscode
+roadmap.txt
+app/__pycache__

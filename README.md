@@ -9,8 +9,9 @@ This is a Python client for the [CoreLogic API](https://developer.corelogic.asia
 
 ## Usage
 
+Install requirements
+`pip3 install -r requirements.txt`
 
 
 
 ## Todos
-
