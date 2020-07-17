@@ -12,7 +12,6 @@ class Client(object):
         self.headers = {'Content-Type': 'application/json',
                         'Authorization' : 'Bearer ' + self.access_token}
     
-        self.auction_type = Auction(self.url, self.headers)
 
     def authorise(self):
         endpoint = '/access/oauth/token'
@@ -28,15 +27,6 @@ class Client(object):
         return result.json()['access_token']
     
     
-    def auctions(self, subtype="summaries", state="nsw"):
-        r"""
-        subtypes: summaries, results, comparison, details
-        state: nsw, nt, qld, sa, tas, vic, wa, act
-        """
-        base = "/au/" + subtype + "/state/" + state
-        endpoint = "/"
-
-        return None
         
 
 
