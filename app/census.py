@@ -3,7 +3,7 @@ import requests
 from requests.exceptions import HTTPError
 
 
-# under property/ in future
+# under censusServices/ in future
 class Census(Authentication):
 
     def __init__(self):
@@ -36,12 +36,16 @@ class Census(Authentication):
         ):
 
         payload = {
-            "fromDate": from_date,
-            "locationId": location_id,
-            "locationTypeId": location_id_type,
-            "metricTypeGroupId": metric_type_group_id,
-            "metricTypeId": metric_type_id,
-            "toDate": to_date
+            'censusRequestList': [
+                {
+                    "fromDate": from_date,
+                    "locationId": location_id,
+                    "locationTypeId": location_id_type,
+                    "metricTypeGroupId": metric_type_group_id,
+                    "metricTypeId": metric_type_id,
+                    "toDate": to_date
+                }
+            ]
         }
 
         try:
