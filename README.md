@@ -4,13 +4,13 @@
 
 This is a Python client for the [CoreLogic API](https://developer.corelogic.asia/apis/docs/overview-au).  
 
-I haven't seen any clients for Python, so this is a start. 
+I haven't seen any clients/ wrappers for Python, so this is a start. 
 
 
 
 ## Usage
 
-Install requirements
+Install requirements  
 `pip3 install -r requirements.txt`
 
 Basic usage is can be accessed through Client.py where default parameters are given to for subquries.  
