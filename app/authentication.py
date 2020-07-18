@@ -6,8 +6,9 @@ from auctions import Auction
 
 class Authentication(object):
 
-    def __init__(self, dev=False):
-        self.url = "https://access-api.corelogic.asia" if not dev else "https://access-api.corelogic.asia/sandbox"
+    def __init__(self, live=True):
+        # self.url = "https://access-api.corelogic.asia" if live else "https://access-api.corelogic.asia/sandbox"
+        self.url = "https://access-api.corelogic.asia/sandbox"
         self.access_token = self.generate_token()
         self.headers = {'Content-Type': 'application/json',
                         'Authorization' : 'Bearer ' + self.access_token}
@@ -30,4 +31,4 @@ class Authentication(object):
 
 
 if __name__ == "__main__":
-    c = Authentication()
+    c = Authentication(False)
