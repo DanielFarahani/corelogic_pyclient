@@ -1,6 +1,7 @@
 from authentication import Authentication
 import requests
 from requests.exceptions import HTTPError
+from datetime import datetime
 
 
 # under censusServices/ in future
@@ -46,15 +47,14 @@ class Census(Authentication):
         self, 
         from_date="", 
         to_date="", 
-        location_id=12606, 
-        location_id_type=8, 
-        metric_type_group_id=120, 
-        metric_type_id=0
+        location_id="12606", 
+        location_id_type="8", 
+        metric_type_group_id="120", 
+        metric_type_id="0"
         ):
         r'''
-        {
-            "censusResponseList": [
-                {
+        {"censusResponseList": 
+            [{
                 "councilAreaName": "string",
                 "countryName": "string",
                 "isSumStatistic": true,
@@ -76,7 +76,8 @@ class Census(Authentication):
                 "territorialAuthorityName": "string"
                 }
             ],
-            "errors": [ { "msg": "string" } ]
+            "errors": 
+            [ { "msg": "string" } ]
         }
         '''
 
@@ -94,11 +95,14 @@ class Census(Authentication):
         }
 
         try:
-            res = requests.post(self.url + "/census", data=payload, headers=self.headers).json().__dict__()
-            
+            res = requests.post(self.base + "/census", data=payload, headers=self.headers)
+            res = res.json()
+
         except HTTPError as err:
             print(err)
 
+        return res
+
 if __name__ == "__main__":
     c = Census()
-    print(c.summary())
+    print(c.census())
