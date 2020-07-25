@@ -3,8 +3,7 @@ import requests
 from requests.exceptions import HTTPError
 from datetime import datetime
 
-
-# under censusServices/ in future
+#TODO create the code dictionary
 class Census(Authentication):
 
     def __init__(self):
@@ -45,12 +44,12 @@ class Census(Authentication):
 # size, parks (#, %), age group, household, repayment (range/m), occupation type, median salary
     def census(
         self, 
+        location_id=12606, 
+        location_id_type=8, 
+        metric_type_group_id=120, 
+        metric_type_id=0,
         from_date="", 
-        to_date="", 
-        location_id="12606", 
-        location_id_type="8", 
-        metric_type_group_id="120", 
-        metric_type_id="0"
+        to_date=""
         ):
         r'''
         {"censusResponseList": 
@@ -80,24 +79,27 @@ class Census(Authentication):
             [ { "msg": "string" } ]
         }
         '''
+        #TODO conditional for including metric_type_id
+        payload = f'''
+                        {{
+                        "censusRequestList":
+                            [
+                                {{
+                                    "fromDate": "{from_date}",
+                                    "locationId": {location_id},
+                                    "locationTypeId": {location_id_type},
+                                    "metricTypeGroupId": {metric_type_group_id},
+                                    "toDate": "{to_date}"
+                                }}
+                            ]
+                        }}
+                    '''
 
-        payload = {
-            'censusRequestList': [
-                {
-                    "fromDate": from_date,
-                    "locationId": location_id,
-                    "locationTypeId": location_id_type,
-                    "metricTypeGroupId": metric_type_group_id,
-                    "metricTypeId": metric_type_id,
-                    "toDate": to_date
-                }
-            ]
-        }
-
+        print(payload)
         try:
             res = requests.post(self.base + "/census", data=payload, headers=self.headers)
             res = res.json()
-
+            
         except HTTPError as err:
             print(err)
 

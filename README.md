@@ -18,12 +18,10 @@ For detailed usage individual end points can be called directly.
 
 [] create an account on [coreLogic developer](https://developer.corelogic.asia/user)  
 [] add an config.py file to app/  
-[] copy and paste the below into config.py replacing the values
+[] copy and paste your **Client ID** and **Secret** into config.py replacing the values
 ```
-account_info = {
-    'cid': '<your Client_id>',
-    'secret': '<your secret_code>'
-}
+client_id = '<your Client_id>'
+secret = '<your secret_code>'
 ```
 
 
