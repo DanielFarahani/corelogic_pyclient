@@ -29,14 +29,12 @@ class Census(Authentication):
         }
         '''
         
-        params = {
-            'locationId': location_id,
-            'locationTypeid': location_type_id
-        }
+        params = { 'locationId': location_id, 'locationTypeId': location_type_id}
 
         try:
-            res = requests.get(self.url + "/census/summary", params=params, headers=self.headers)
+            res = requests.get(self.base + "/census/summary", params=params, headers=self.headers)
             res = res.json()
+
         except HTTPError as err:
             print(err) 
         
