@@ -1,26 +1,23 @@
-from config import account_info
+from config import client_id, secret
 import json
 import requests
 from requests.exceptions import HTTPError
-from auctions import Auction
 
 class Authentication(object):
 
-    def __init__(self, live=True):
-        # self.url = "https://access-api.corelogic.asia" if live else "https://access-api.corelogic.asia/sandbox"
-        self.url = "https://access-api.corelogic.asia/sandbox"
-        self.access_token = self.generate_token()
-        self.headers = {'Content-Type': 'application/json',
-                        'Authorization' : 'Bearer ' + self.access_token}
+    def __init__(self, live=False):
+        self.auth = "https://access-api.corelogic.asia"
+        self.base = "https://access-api.corelogic.asia" if live  else "https://access-api.corelogic.asia/sandbox"
+        self.access_token = self.generate_token(client_id, secret)
+        
+        self.headers = {'Content-Type': 'application/json', 'Authorization' : 'Bearer ' + self.access_token}
 
-        self.auction_class = Auction(self.url, self.headers)
-
-    def generate_token(self):
+    def generate_token(self, cid, secret):
         endpoint = '/access/oauth/token'
         try:
-            payload = {'grant_type': 'client_credentials', 'client_id': account_info['cid'], 'client_secret': account_info['secret']}
-            result = requests.get(self.url + endpoint, params=payload)
-        
+            params = {'grant_type': 'client_credentials', 'client_id': cid, 'client_secret': secret}
+            result = requests.get(self.auth + endpoint, params=params)
+
         except HTTPError as err:
             print(f'HTTP error occurred: {err}')
 
@@ -31,4 +28,4 @@ class Authentication(object):
 
 
 if __name__ == "__main__":
-    c = Authentication(False)
+    a = Authentication()

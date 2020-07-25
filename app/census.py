@@ -8,7 +8,7 @@ class Census(Authentication):
 
     def __init__(self):
         super().__init__(False)
-        self.url += "/statistics"
+        self.base += "/statistics"
 
 
     #TODO just push this to census as kwargs
