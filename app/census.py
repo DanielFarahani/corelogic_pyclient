@@ -3,7 +3,6 @@ import requests
 from requests.exceptions import HTTPError
 from datetime import datetime
 
-#TODO create the code dictionary
 class Census(Authentication):
 
     def __init__(self):
@@ -14,8 +13,7 @@ class Census(Authentication):
     #TODO just push this to census as kwargs
     def summary(self, location_id=12606, location_type_id=8):
         r'''
-        returns:
-        {
+        returns: {
             "censusSummaryDescription": "string",
             "councilAreaName": "string",
             "countryName": "string",
@@ -25,8 +23,7 @@ class Census(Authentication):
             "locationType": "string",
             "postcodeName": "string",
             "stateName": "string",
-            "territorialAuthorityName": "string"
-        }
+            "territorialAuthorityName": "string" }
         '''
         
         params = { 'locationId': location_id, 'locationTypeId': location_type_id}
@@ -41,7 +38,7 @@ class Census(Authentication):
         return res
 
 
-# size, parks (#, %), age group, household, repayment (range/m), occupation type, median salary
+# description components: size, parks (#, %), age group, household, repayment (range/m), occupation type, median salary
     def census(
         self, 
         location_id=12606, 
@@ -79,6 +76,7 @@ class Census(Authentication):
             [ { "msg": "string" } ]
         }
         '''
+
         #TODO conditional for including metric_type_id
         payload = f'''
                         {{
