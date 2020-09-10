@@ -39,8 +39,7 @@ class Census(Authentication):
 
 
 # description components: size, parks (#, %), age group, household, repayment (range/m), occupation type, median salary
-    def census(
-        self, 
+    def census(self, 
         location_id=12606, 
         location_id_type=8, 
         metric_type_group_id=120, 
@@ -49,7 +48,15 @@ class Census(Authentication):
         to_date=""
         ):
         r'''
-        {"censusResponseList": 
+        Parameters: Location_id: , 
+        location_id_type: (3: council, 4: postcode, 8: locality),
+        metric_type_group_id: ,
+        metric_type_id: ,
+        from_date: yyyy-mm-dd,
+        to_date: yyyy-mm-dd
+        
+        Returns: {
+        "censusResponseList": 
             [{
                 "councilAreaName": "string",
                 "countryName": "string",
@@ -70,9 +77,8 @@ class Census(Authentication):
                 "seriesDataList": [ { "dateTime": "2020-07-25T11:07:20.896Z", "value": 0 } ],
                 "stateName": "string",
                 "territorialAuthorityName": "string"
-                }
-            ],
-            "errors": 
+            }],
+        "errors": 
             [ { "msg": "string" } ]
         }
         '''
