@@ -15,23 +15,26 @@ class Valuations(Authentication):
         print("testing")
 
     # current, historic, live
-    def origination(self, propertyId):
-        country_code = 'au'
-        params = { 'locationId': location_id, 'locationTypeId': location_type_id}
+    def origination(self, propertyId, current=True, date=""):
+        r'''
+            Endpoint for
+        '''
 
+        rtype = "/current" if current elif "/{date}" else ""
+        endpoint = "/intellival/origination" + rtype
+        params = {'countryCode': 'au', 'propertyId': propertyId}
         try:
-            res = requests.get(self.base + "/census/summary", params=params, headers=self.headers)
-            res = res.json() # description components: size, parks (#, %), age group, household, repayment (range/m), occupation type, median salary
+            res = requests.get(self.base + endpoint, params=params, headers=self.headers)
+            res = res.json()
         except HTTPError as err:
-            print(err) 
-        
+            return err 
         return res
 
     def consumer(self):
         pass
 
-    def custom_valutions(self):
-        pass
+    def custom_valutions(self, propertyId):
+        base = super.base + "/liveavm/intellival/origination"
     
 
 
@@ -42,12 +45,9 @@ if __name__ == "__main__":
 
 '''
 Origination (current, historical, live)
-/au/properties/{propertyId}/avm/intellival/origination/current
---
 /au/properties/{propertyId}/avm/intellival/origination
+/au/properties/{propertyId}/avm/intellival/origination/current
 /au/properties/{propertyId}/avm/intellival/origination/{valuationDate}
---
-/au/properties/{propertyId}/liveavm/intellival/origination
 
 
 Consumer (current, historical, live)
