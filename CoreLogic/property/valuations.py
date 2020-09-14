@@ -17,10 +17,20 @@ class Valuations(Authentication):
     # current, historic, live
     def origination(self, propertyId, current=True, date=""):
         r'''
-            Endpoint for
+            Valuations for collateral risk decisions. Can get current valutions. A list of historic
+            valuations. A valuation at a point of time based on yyyy-mm-dd date format. 
+            returns: { "valuations": 
+                        [ {"confidence": "LOW",
+                            "estimate": 0,
+                            "fsd": 0,
+                            "highEstimate": 0,
+                            "lowEstimate": 0,
+                            "isCurrent": false,
+                            "valuationDate": "string"}
+                        ]}
         '''
 
-        rtype = "/current" if current elif "/{date}" else ""
+        rtype = "/current" if current else "/{date}"
         endpoint = "/intellival/origination" + rtype
         params = {'countryCode': 'au', 'propertyId': propertyId}
         try:
