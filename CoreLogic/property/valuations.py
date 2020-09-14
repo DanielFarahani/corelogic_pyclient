@@ -17,10 +17,12 @@ class Valuations(Authentication):
     # current, historic, live
     def origination(self, propertyId, current=True, date=""):
         r'''
-            Valuations for collateral risk decisions. Can get current valutions. A list of historic
-            valuations. A valuation at a point of time based on yyyy-mm-dd date format. 
+            Valuations for collateral risk decisions. 
+            Current=True (default) gives current valuations
+            Current=False w/o date: gives past 90 days valuation
+            current=False w/ data: gives valuation at specific date (yyyy-mm-dd)
             returns: { "valuations": 
-                        [ {"confidence": "LOW",
+                        [ { "confidence": "LOW",
                             "estimate": 0,
                             "fsd": 0,
                             "highEstimate": 0,
@@ -40,8 +42,33 @@ class Valuations(Authentication):
             return err 
         return res
 
-    def consumer(self):
-        pass
+    #TODO with bands
+    def consumer(self, current=True, date=""):
+        r'''
+            Gets current or historical consumer valutions. 
+            Current=True (default) gives current valuations
+            Current=False w/o date: gives past 52 week valuation
+            current=False w/ data: gives valuation at specific date (yyyy-mm-dd)
+            returns: { "valuations": 
+                         [ { "confidence": "LOW",
+                            "estimate": 0,
+                            "fsd": 0,
+                            "highEstimate": 0,
+                            "isCurrent": false,
+                            "lowEstimate": 0,
+                            "valuationDate": "string"}
+                        ] }
+        '''
+
+        rtype = "/current" if current else "/{date}"
+        endpoint = "/intellival/consumer" + rtype
+        params = {'countryCode': 'au', 'propertyId': propertyId}
+        try:
+            res = requests.get(self.base + endpoint, params=params, headers=self.headers)
+            res = res.json()
+        except HTTPError as err:
+            return err 
+        return res
 
     def custom_valutions(self, propertyId):
         base = super.base + "/liveavm/intellival/origination"
@@ -61,6 +88,9 @@ Origination (current, historical, live)
 
 
 Consumer (current, historical, live)
+au/properties/2/avm/intellival/consumer
+au/properties/2/avm/intellival/consumer/current
+au/properties/2/avm/intellival/consumer/2020-05-05
 
 
 '''
