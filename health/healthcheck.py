@@ -30,4 +30,4 @@ class healthcheck:
 
 if __name__ == "__main__":
     hc = healthcheck()
-    print(hc.healthcheck_statistics())
+    print(hc.healthcheck_statistics()),

@@ -3,6 +3,7 @@ import requests
 from requests.exceptions import HTTPError
 from datetime import datetime
 
+# https://developer.corelogic.asia/apis/docs/census-au-nz#/census/Census%20Summary%20service
 class Census(Authentication):
 
     def __init__(self):
@@ -45,7 +46,7 @@ class Census(Authentication):
         metric_type_group_id=120, 
         metric_type_id=0,
         from_date="", 
-        to_date=""
+        to_date="",
         ):
         r'''
         Parameters: Location_id: , 
