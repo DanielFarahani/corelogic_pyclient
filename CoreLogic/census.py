@@ -31,8 +31,7 @@ class Census(Authentication):
 
         try:
             res = requests.get(self.base + "/census/summary", params=params, headers=self.headers)
-            res = res.json()
-
+            res = res.json() # description components: size, parks (#, %), age group, household, repayment (range/m), occupation type, median salary
         except HTTPError as err:
             print(err) 
         
@@ -100,8 +99,7 @@ class Census(Authentication):
 
         try:
             res = requests.post(self.base + "/census", data=payload, headers=self.headers)
-            res = res.json()
-            # description components: size, parks (#, %), age group, household, repayment (range/m), occupation type, median salary
+            res = res.json()  
         except HTTPError as err:
             print(err)
 
