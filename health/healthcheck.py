@@ -55,8 +55,4 @@ class healthcheck:
 
 if __name__ == "__main__":
     hc = healthcheck()
-<<<<<<< HEAD
-    print(hc.healthcheck_statistics()),
-=======
     print(hc.healthcheck_property())
->>>>>>> 06adfe9c77584d7ab91f74d2129b825cfd0d4ac8

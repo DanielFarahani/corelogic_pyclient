@@ -84,6 +84,7 @@ class Census(Authentication):
         '''
 
         #TODO conditional for including metric_type_id
+        endpoint = "/census"
         payload = f'''{{
                         "censusRequestList":
                             [
@@ -98,12 +99,8 @@ class Census(Authentication):
                         }}'''
 
         try:
-            res = requests.post(self.base + "/census", data=payload, headers=self.headers)
-<<<<<<< HEAD:CoreLogic/census.py
+            res = requests.post(self.base + endpoint, data=payload, headers=self.headers)
             res = res.json()  
-=======
-            res = res.json()
->>>>>>> 06adfe9c77584d7ab91f74d2129b825cfd0d4ac8:app/census.py
         except HTTPError as err:
             print(err)
 
