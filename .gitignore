@@ -1,4 +1,4 @@
-app/config.py
+config.py
 .vscode
 roadmap.txt
-app/__pycache__
+Corelogic/__pycache__

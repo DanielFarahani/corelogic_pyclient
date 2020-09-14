@@ -39,7 +39,7 @@ class Census(Authentication):
         return res
 
 
-# description components: size, parks (#, %), age group, household, repayment (range/m), occupation type, median salary
+    
     def census(self, 
         location_id=12606, 
         location_id_type=8, 
@@ -85,8 +85,7 @@ class Census(Authentication):
         '''
 
         #TODO conditional for including metric_type_id
-        payload = f'''
-                        {{
+        payload = f'''{{
                         "censusRequestList":
                             [
                                 {{
@@ -97,14 +96,12 @@ class Census(Authentication):
                                     "toDate": "{to_date}"
                                 }}
                             ]
-                        }}
-                    '''
+                        }}'''
 
-        print(payload)
         try:
             res = requests.post(self.base + "/census", data=payload, headers=self.headers)
             res = res.json()
-            
+            # description components: size, parks (#, %), age group, household, repayment (range/m), occupation type, median salary
         except HTTPError as err:
             print(err)
 
