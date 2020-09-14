@@ -5,9 +5,10 @@ from requests.exceptions import HTTPError
 
 class Authentication(object):
 
-    def __init__(self, live=False):
+    def __init__(self, test=False):
         self.auth = "https://access-api.corelogic.asia"
-        self.base = "https://api-uat.corelogic.asia" if live else "https://api-uat.corelogic.asia/sandbox"
+        # self.base = "https://api.corelogic.asia"
+        self.base = "https://api-uat.corelogic.asia" if test else "https://api-uat.corelogic.asia/sandbox"
         self.access_token = self.generate_token(client_id, secret)
         self.headers = {'Content-Type': 'application/json', 'Authorization' : 'Bearer ' + self.access_token}
 
