@@ -1,8 +1,5 @@
 config.py
 .vscode
 roadmap.txt
-<<<<<<< HEAD
 CoreLogic/__pycache__
-=======
-Corelogic/__pycache__
->>>>>>> 06adfe9c77584d7ab91f74d2129b825cfd0d4ac8
+.DS_Store
