@@ -15,9 +15,14 @@ class Suggest(Authentication):
 
         
 
-    def suggest_places(instr, limit, units, bodycorp, ):
-        r'''
-            Description: Gives a list of suggestions based on location (street, suburb, state, etc.) input.
+    def suggest_places(self, instr, limit, units, bodycorp):
+        r'''Description: Gives a list of suggestions based on location (street, suburb, state, etc.) input.
+            input: address, street (min 3 char), suburb or state (min 2 char). 
+            suggestType: "address, street, locality, postcode, territorialAuthority, councilArea, state, country"
+            Limit: number of suggestions returned (default 10)
+            includesUnits: unit property type (default True)
+            includesBodyCorp: include body corporates (default True)
+            returnSuggestion: {only, byType, detail}
             returns: {"suggestions": [{
                 "councilAreaId": 0,
                 "countryId": 0,

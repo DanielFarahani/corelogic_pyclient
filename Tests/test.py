@@ -1,9 +1,26 @@
-from census import Census
-from temp import payload
+from ../corelogic import (suggest, search, valuations)
+import os, sys
 import requests
+import unittest
 
-c = Census()
+# gather some propertyIDs through suggestoin and search service to use in AVM service
 
-print(payload)
+class WrapperTest(unittest.TestCase):
 
-print(requests.post(c.base + "/census", data=payload, headers=c.headers).json())
+    def setup(self):
+        sandbox_areas = {}
+        property_info = {}
+        property_ids = {}
+
+    def suggestion_test(self):
+        pass
+
+    def search_test(self):
+        pass
+
+    # Automated Valuation Model
+    def avm_test(self):
+        pass
+
+if __name__ == '__main__':
+    unittest.main()

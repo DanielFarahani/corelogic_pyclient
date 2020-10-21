@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name="corelogic_pyclient",
-      version="0.5.0",
+      version="0.1.0",
       description="Python client for Interacting with coreLogic API - Property Data Reports & Analytics",
       url="https://github.com/danielfarahani/corelogic_pyclient",
       classifiers=[
@@ -9,7 +9,7 @@ setup(name="corelogic_pyclient",
           'License :: OSI Approved :: MIT License',
           'Programming Language :: Python :: 3.6',
       ],
-      keywords='Real-estate proptech property',
+      keywords='corelogic proptech property',
       author="Daniel Farahani",
       author_email="danfarahani@gmail.com",
       license="MIT",

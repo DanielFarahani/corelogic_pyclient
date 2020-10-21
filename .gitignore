@@ -3,3 +3,4 @@ config.py
 roadmap.txt
 CoreLogic/__pycache__
 .DS_Store
+response_*
