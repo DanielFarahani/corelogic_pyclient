@@ -29,4 +29,8 @@ secret = '<your secret_code>'
 
 Pull requests and collaboration is greatly welcomed!
 
-- starting with interesting endpoints
+End point implementation order:
+- Automatic Valuation Model (AVM) to get price of a house
+- Property details (photos, past sale values, etc.)
+- Helper: suggestion services to get property data
+- Helper: search service to get address from property data

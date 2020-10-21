@@ -5,22 +5,33 @@ from requests.exceptions import HTTPError
 
 class Authentication(object):
 
-    def __init__(self, test=False):
+    def __init__(self, dev=True):
+        # dev (+ sandbox), test (api-uat), prod (api)
+        self.prod = "https://api.corelogic.asia"
+        self.test = "https://api-uat.corelogic.asia"
+        self.dev = "https://api-uat.corelogic.asia/sandbox"
+        
+        self.base = self.dev if dev else self.test 
         self.auth = "https://access-api.corelogic.asia"
-        # self.base = "https://api.corelogic.asia"
-        self.base = "https://api-uat.corelogic.asia" if test else "https://api-uat.corelogic.asia/sandbox"
-        self.access_token = self.generate_token(client_id, secret)
-        self.headers = {'Content-Type': 'application/json', 'Authorization' : 'Bearer ' + self.access_token}
 
+        self.access_token = 'Bearer ' + self.generate_token(client_id, secret)
+        self.headers = {'Content-Type': 'application/json', \
+                        'Authorization' : self.access_token}
+
+    # Generate Authentication token
     def generate_token(self, cid, secret):
-        endpoint = '/access/oauth/token'
+        endpoint = self.auth + '/access/oauth/token'
         try:
-            params = {'grant_type': 'client_credentials', 'client_id': cid, 'client_secret': secret}
-            result = requests.get(self.auth + endpoint, params=params)
+            params = {'grant_type': 'client_credentials', \
+                        'client_id': cid, 'client_secret': secret}
+
+            result = requests.get(endpoint, params=params)
+            token = result.json()['access_token']
+
         except HTTPError as err:
             print(f'HTTP error occurred: {err}')
 
-        return result.json()['access_token']
+        return token
 
 
 
