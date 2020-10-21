@@ -7,14 +7,10 @@ This is a Python client for the [CoreLogic API](https://developer.corelogic.asia
 I haven't seen any clients/ wrappers for Python, so this is a start. 
 
 
-
 ## Usage
 
 Install requirements  
 `pip3 install -r requirements.txt`
-
-Basic usage is can be accessed through Client.py where default parameters are given to for subquries.  
-For detailed usage individual end points can be called directly.
 
 [] create an account on [coreLogic developer](https://developer.corelogic.asia/user)  
 [] add an config.py file to app/  
@@ -23,6 +19,8 @@ For detailed usage individual end points can be called directly.
 client_id = '<your Client_id>'
 secret = '<your secret_code>'
 ```
+
+The structure of the package is similar to the Postman [collection provided](https://documenter.getpostman.com/view/7051651/S1EJWfxt) by CoreLogic.
 
 
 ## Tasks
