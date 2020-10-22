@@ -4,6 +4,7 @@ from requests.exceptions import HTTPError
 from datetime import datetime
 
 
+
 class Search(Authentication):
 
     def __init__(self, country='au'):
@@ -35,14 +36,10 @@ class Search(Authentication):
         url = self.base + endpoint
 
         params = {
-            'sort': sort,
-            'size': size,
-            'page': page,
-            'baths': baths,
-            'beds': beds,
-            'carSpace': carSpace,
-            'landArea': landArea,
-            'pTypes': pTypes,
+            'sort': sort, 'size': size,
+            'page': page, 'baths': baths,
+            'beds': beds, 'carSpace': carSpace,
+            'landArea': landArea, 'pTypes': pTypes,
         }
 
         try:
@@ -54,8 +51,12 @@ class Search(Authentication):
         
         return res
 
+
     def property_last_sale_search():
         endpoint = '/lastSale'
         pass
 
+
+if __name__ == "__main__":
+    s = Search()
 

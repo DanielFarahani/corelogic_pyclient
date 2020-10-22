@@ -13,7 +13,7 @@ Install requirements
 `pip3 install -r requirements.txt`
 
 [] create an account on [coreLogic developer](https://developer.corelogic.asia/user)  
-[] add an config.py file to app/  
+[] add an config.py file to CoreLogic/ (it will be ignored)  
 [] copy and paste your **Client ID** and **Secret** into config.py replacing the values
 ```
 client_id = '<your Client_id>'

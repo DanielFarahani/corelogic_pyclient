@@ -6,7 +6,7 @@ from requests.exceptions import HTTPError
 class Authentication(object):
 
     def __init__(self, dev=True):
-        # dev (+ sandbox), test (api-uat), prod (api)
+        # prod (api), test (api-uat), dev (+ /sandbox)
         self.prod = "https://api.corelogic.asia"
         self.test = "https://api-uat.corelogic.asia"
         self.dev = "https://api-uat.corelogic.asia/sandbox"

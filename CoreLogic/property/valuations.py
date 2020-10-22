@@ -85,5 +85,6 @@ class Valuations(Authentication):
 
 
 if __name__ == "__main__":
+
     v = Valuations()
     v.test()

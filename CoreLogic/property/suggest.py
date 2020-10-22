@@ -1,21 +1,25 @@
-from authentication import Authentication
 import requests
 from requests.exceptions import HTTPError
 from datetime import datetime
+import sys, os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+from authentication import Authentication
 
 
 class Suggest(Authentication):
-
-    def __init__(self):
+    def __init__(self, country='au', type='v2'):
         super().__init__()
 
         # website: /property/au/v2/suggest.json
         # website: /property/au/parcel/suggest.json
+        # self.base += /property/{country}/{type}
+
         # postman: /places/places/suggest
+        self.stype = "address, street, locality, postcode"
 
-        
 
-    def suggest_places(self, instr, limit, units, bodycorp):
+    def suggest_places(self, search, stype="", limit=10, units=True, bodycorp=True, returnSuggest='datail'):
         r'''Description: Gives a list of suggestions based on location (street, suburb, state, etc.) input.
             input: address, street (min 3 char), suburb or state (min 2 char). 
             suggestType: "address, street, locality, postcode, territorialAuthority, councilArea, state, country"
@@ -43,18 +47,30 @@ class Suggest(Authentication):
                     "requestDate": "string"}
             }
         '''
-        
+
         endpoint = '/places/places/suggest'
         url = self.base + endpoint
+
         params = {
-            'q': instr,
-            'limit': limit
+            'q': search,
+            'type': stype,
+            'limit': limit,
+            'units': units,
+            'bodycorp': bodycorp,
+            'returnSuggest': returnSuggest,
         }
 
         try:
             res = requests.get(url, params=params, headers=self.headers)
             res = res.json()
+
         except HTTPError as err:
             return err
         
         return res
+
+
+if __name__ == "__main__":
+    print("=============")
+    s = Suggest()
+    print(s.suggest_places('monash'))
