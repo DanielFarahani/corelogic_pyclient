@@ -10,11 +10,12 @@ class Search(Authentication):
     def __init__(self, country='au'):
         # variations: search, property, places, Location
         super().__init__()
-        self.base += "/search"
+        self.base += f'/search/{country}'
 
 
-    def property_search(self, type, id, country='au', 
-        sort="asc", 
+    def property_search(self, stype, id, 
+        country='au', 
+        sort="address,asc", 
         size=20,
         page=0, 
         baths="0-", 
@@ -22,7 +23,7 @@ class Search(Authentication):
         carSpace="0-", 
         landArea="0-", 
         pTypes=""):
-        r'''
+        """
         Description: gives results
         type: type of id given for the search {street, place, locality, councilArea, Postcode}
         id: the ID of the search from "CoreLogic Suggest Service"
@@ -30,9 +31,9 @@ class Search(Authentication):
         'UNIT', 'FLATS', 'COMMERCIAL', 'HOUSE', 'LAND', 'BUSINESS', 'OTHER', 'COMMUNITY', 
         'FARM', 'STORAGE_UNIT'
         returns: Schema 
-        '''
+        """
         
-        endpoint = '/{country}/property/{type}/{id}'
+        endpoint = f'/property/{stype}/{id}'
         url = self.base + endpoint
 
         params = {

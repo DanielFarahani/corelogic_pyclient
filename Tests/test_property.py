@@ -1,21 +1,47 @@
-from CoreLogic.property import (suggest, search, valuations)
 import os, sys
 import requests
 import unittest
-from . import UnitTest
 
-class TestProperty(UnitTest):
+sys.path.append('../')
+from corelogic.property import (suggest, search, valuations)
+from api_env_info import sandbox_env
 
-    # gather some propertyIDs through suggestoin and search service to use in AVM service
+
+class TestProperty(unittest.TestCase):
+    def setup(self):
+        """Setup runs before all test cases."""       
+        self.suburbs_dict = dict()
+        self.propertyIds_dict = dict()
+
+    # Get suburb ids based on Sandbox data
     def suggestion_test(self):
         sug = suggest.Suggest()
-        res = sug.suggest_places(suburbs[0])
-        for info in res['suggestions']:
-            sandbox_areas = info['postcodeId']
+        for states in sandbox_env['Australia']:
+            for suburbs in sandbox_env['Australia'][states]:
+                suggestions = sug.suggest_places(suburbs)['suggestions']
 
+                if suggestions:
+                    for suggestion in suggestions:
+                        try:
+                            self.suburbs_dict[suburbs].append(suggestion['localityId'])
+                        except:
+                            self.suburbs_dict[suburbs] = [suggestion['localityId']]
+
+    # Get unique propertyIds for the Sandbox data
     def search_test(self):
-        pass
+        s = search.Search()
+        for suburbs, codes in self.suburbs_dict.items():
+            for code in codes:
+                prop_list = s.property_search('locality', code)['_embedded']['propertySummaryList']
+                for prop in prop_list:
+                    prop = prop['propertySummary']
+                    self.propertyIds_dict[prop['address']['singleLineAddress']] = prop['id']
 
-    # Automated Valuation Model
+
+    # Get valuation for peropertyIds
     def avm_test(self):
-        pass
+        v = valuations()
+
+
+if __name__ == "__main__":
+    unittest.main()

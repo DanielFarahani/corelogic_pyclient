@@ -8,15 +8,14 @@ class Valuations(Authentication):
 
     def __init__(self):
         super().__init__()
-        self.version = 1
         # website: self.base += "avm/au/properties/2/avm/intellival/origination/current"
         # postman: self.base += /property//au/v1/property/avm.json	
 
-        self.base += "/property/au/v{self.version}/property/avm"
+        self.base += "/property/au/v2/property/avm"
 
     # current, historic, live
     def origination(self, propertyId, current=True, date=""):
-        r'''
+        """
             Descriptions: Valuations for collateral risk decisions. 
             Current=True (default) gives current valuations
             Current=False w/o date: gives past 90 days valuation
@@ -30,7 +29,7 @@ class Valuations(Authentication):
                             "isCurrent": false,
                             "valuationDate": "string"}
                         ]}
-        '''
+        """
 
         rtype = "/current" if current else "/{date}"
         endpoint = "/intellival/origination" + rtype
@@ -47,7 +46,7 @@ class Valuations(Authentication):
 
 
     def consumer(self, current=True, date=""):
-        r'''
+        """
             Description: Gets current or historical consumer valutions. 
             Current=True (default) gives current valuations
             Current=False w/o date: gives past 52 week valuation
@@ -61,7 +60,7 @@ class Valuations(Authentication):
                             "lowEstimate": 0,
                             "valuationDate": "string"}
                         ] }
-        '''
+        """
 
         rtype = "/current" if current else "/{date}"
         endpoint = "/intellival/consumer" + rtype
@@ -76,9 +75,9 @@ class Valuations(Authentication):
 
     # valution based on 
     def custom_valutions(self, propertyId):
-        r'''
+        """
         Description: Get valuation for a hypothetical or ronovation house.
-        '''
+        """
         
         base = super.base + "/liveavm/intellival/origination"
         return {}
