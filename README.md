@@ -13,11 +13,12 @@ Install requirements
 `pip3 install -r requirements.txt`
 
 [] create an account on [coreLogic developer](https://developer.corelogic.asia/user)  
-[] add an config.py file to CoreLogic/ (it will be ignored)  
-[] copy and paste your **Client ID** and **Secret** into config.py replacing the values
+[] add **Client ID** and **Secret** to enviroment variable
 ```
-client_id = '<your Client_id>'
-secret = '<your secret_code>'
+#!/bin/bash
+#E.g. setup.sh (Then chmod +x setup.sh)
+client_id='<Your Client_id>'
+secret='<Your secret_code>'
 ```
 
 The structure of the package is similar to the Postman [collection provided](https://documenter.getpostman.com/view/7051651/S1EJWfxt) by CoreLogic.

@@ -1,4 +1,4 @@
-from config import client_id, secret
+# from config import client_id, secret
 import json
 import requests
 from requests.exceptions import HTTPError
@@ -13,6 +13,9 @@ class Authentication(object):
         
         self.base = self.dev if dev else self.test 
         self.auth = "https://access-api.corelogic.asia"
+
+        client_id = os.environ['client_id']
+        secret = os.environ['secret'] 
 
         self.access_token = 'Bearer ' + self.generate_token(client_id, secret)
         self.headers = {'Content-Type': 'application/json', \
