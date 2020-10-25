@@ -2,25 +2,21 @@ import requests
 from requests.exceptions import HTTPError
 from datetime import datetime
 
-import sys, os
 # sys.path.append('../')
+import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 from authentication import Authentication
 
 
 class Suggest(Authentication):
-    def __init__(self, country='au', type='v2'):
+    def __init__(self, country='au', version='v2', properties=True):
         super().__init__()
-
-        # website: /property/au/v2/suggest.json
-        # website: /property/au/parcel/suggest.json
-        # self.base += /property/{country}/{type}
-
-        # postman: /places/places/suggest
-        self.stype = "address, street, locality, postcode"
+        self.version = version
+        
+        self.base += f'/property/au' if properties else '/places/places'
 
 
-    def suggest_places(self, search, 
+    def suggest_properties(self, search, parcel=True,
         stype="address, street, locality, postcode", 
         limit=10, 
         units=True, 
@@ -53,21 +49,22 @@ class Suggest(Authentication):
                     "requestDate": "string"}
             }
         """
+
         # NOTE state abbreviation doesnt work (Contant corelogic)
 
-        # endpoint = '/places/places/suggest'
-        # endpoint = '/property/au/parcel/suggest.json'
-        endpoint = '/property/au/v2/suggest.json'
+        endpoint = '/parcel/suggest.json' if parcel else f'v{self.version}/suggest.json'
         url = self.base + endpoint
 
         params = {
             'q': search,
-            'type': stype,
             'limit': limit,
             'units': units,
             'bodycorp': bodycorp,
             'returnSuggest': returnSuggest,
         }
+        
+        if not parcel:
+            params['type'] = stype
 
         try:
             res = requests.get(url, params=params, headers=self.headers)
@@ -77,6 +74,14 @@ class Suggest(Authentication):
             return err
         
         return res
+
+
+    def suggest_places(parameter_list):
+        """
+            Suggests places like schools based on filter options.
+        """
+        pass
+
 
 
 if __name__ == "__main__":

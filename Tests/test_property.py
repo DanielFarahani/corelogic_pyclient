@@ -11,14 +11,16 @@ class TestProperty(unittest.TestCase):
     def setup(self):
         """Setup runs before all test cases."""       
         self.suburbs_dict = dict()
+        self.raw_proIds_dict = dict()
         self.propertyIds_dict = dict()
+        self.valuations = dict()
 
     # Get suburb ids based on Sandbox data
-    def suggestion_test(self):
+    def suggestion_nonparcel_test(self):
         sug = suggest.Suggest()
         for states in sandbox_env['Australia']:
             for suburbs in sandbox_env['Australia'][states]:
-                suggestions = sug.suggest_places(suburbs)['suggestions']
+                suggestions = sug.suggest_properties(suburbs, limit=50)['suggestions']
 
                 if suggestions:
                     for suggestion in suggestions:
@@ -26,6 +28,21 @@ class TestProperty(unittest.TestCase):
                             self.suburbs_dict[suburbs].append(suggestion['localityId'])
                         except:
                             self.suburbs_dict[suburbs] = [suggestion['localityId']]
+    
+    def suggestion_parcel_test(self):
+        sug = suggest.Suggest()
+        for states in sandbox_env['Australia']:
+            for suburbs in sandbox_env['Australia'][states]:
+                suggestions = sug.suggest_properties(suburbs, limit=50)['suggestions']
+
+                if suggestions:
+                    for suggestion in suggestions:
+                        loc = suggestion['suggestion']
+                        try:
+                            self.raw_proIds_dict[loc].append(suggestion['propertyId'])
+                        except:
+                            self.raw_proIds_dict[loc] = (suggestion['propertyId'])
+
 
     # Get unique propertyIds for the Sandbox data
     def search_test(self):
@@ -40,8 +57,30 @@ class TestProperty(unittest.TestCase):
 
     # Get valuation for peropertyIds
     def avm_test(self):
-        v = valuations()
+        v = valuations.Valuations()
+        for sug, pid in self.raw_proIds_dict.items():
+            valuation = v.consumer(pid)
+            self.valuations[pid] = valuation['valution']
 
 
 if __name__ == "__main__":
-    unittest.main()
+    t = TestProperty()
+    t.setup()
+    # t.suggestion_parcel_test()
+    # import json
+    # with open('sandbox_data.json', 'w') as fp:
+    #     json.dump(t.raw_proIds_dict, fp)
+
+    import json
+    with open('sandbox_data.json') as fp:
+        data = json.load(fp)
+    
+    for sug, pid in data.items():
+        print(pid)
+
+    # v = valuations.Valuations()
+    # res = []
+    # for sug, pid in data.items():
+    #     res.append(v.consumer(pid))
+    # t.avm_test()
+    # print(self.valuations)

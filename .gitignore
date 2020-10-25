@@ -5,4 +5,6 @@ CoreLogic/__pycache__
 .DS_Store
 response_*
 __pycache__
+endpoints.txt
 TODO
+sandbox_data.json
