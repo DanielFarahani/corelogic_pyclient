@@ -5,7 +5,7 @@ import json
 from api_env_info import sandbox_env
 
 sys.path.append('../')
-from corelogic.property import (suggest, search, valuations)
+from corelogic.property import (suggest, search, valuations, details)
 
 
 class TestProperty(unittest.TestCase):
@@ -71,11 +71,15 @@ if __name__ == "__main__":
     # with open('sandbox_data.json', 'w') as fp:
     #     json.dump(t.raw_proIds_dict, fp)
 
-    t.search_test()
-    print(t.propertyIds_dict)
+    # t.search_test()
     # with open('sandbox_addresses.json', 'w') as fp:
     #     json.dump(t.propertyIds_dict, fp)
 
+    ## Property detail test
+    # d = details.Details()
+    # res = d.property_attributes(1111865)
+
+    # print(len(res))
     # v = valuations.Valuations()
     # res = []
     # for sug, pid in data.items():

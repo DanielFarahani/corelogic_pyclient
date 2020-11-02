@@ -9,7 +9,7 @@ from authentication import Authentication
 
 
 
-class Search(Authentication):
+class Details(Authentication):
 
     def __init__(self, country='au'):
         # variations: search, property, places, Location
@@ -41,14 +41,12 @@ class Search(Authentication):
                 } 
         """
         
-        core_endpoint = f'/{pid}/attributes/cores'
+        core_endpoint = f'/{pid}/attributes/core'
         additional_endpoint = f'/{pid}/attributes/additional'
-        core_url = self.base + core_endpoint
-        additional_url = self.base + core_endpoint
 
         try:
-            core = requests.get(core_url, params=params, headers=self.headers)
-            additional = requests.get(additional_url, params=params, headers=self.headers)
+            core = requests.get(self.base + core_endpoint, headers=self.headers).json()
+            additional = requests.get(self.base + additional_endpoint, headers=self.headers).json()
             res = {**core, **additional}
 
         except HTTPError as err:
