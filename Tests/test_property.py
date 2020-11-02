@@ -1,10 +1,11 @@
 import os, sys
 import requests
 import unittest
+import json
+from api_env_info import sandbox_env
 
 sys.path.append('../')
 from corelogic.property import (suggest, search, valuations)
-from api_env_info import sandbox_env
 
 
 class TestProperty(unittest.TestCase):
@@ -52,7 +53,7 @@ class TestProperty(unittest.TestCase):
                 prop_list = s.property_search('locality', code)['_embedded']['propertySummaryList']
                 for prop in prop_list:
                     prop = prop['propertySummary']
-                    self.propertyIds_dict[prop['address']['singleLineAddress']] = prop['id']
+                    self.propertyIds_dict[prop['id']] = prop['address']['singleLineAddress']
 
 
     # Get valuation for peropertyIds
@@ -67,16 +68,13 @@ if __name__ == "__main__":
     t = TestProperty()
     t.setup()
     # t.suggestion_parcel_test()
-    # import json
     # with open('sandbox_data.json', 'w') as fp:
     #     json.dump(t.raw_proIds_dict, fp)
 
-    import json
-    with open('sandbox_data.json') as fp:
-        data = json.load(fp)
-    
-    for sug, pid in data.items():
-        print(pid)
+    t.search_test()
+    print(t.propertyIds_dict)
+    # with open('sandbox_addresses.json', 'w') as fp:
+    #     json.dump(t.propertyIds_dict, fp)
 
     # v = valuations.Valuations()
     # res = []
