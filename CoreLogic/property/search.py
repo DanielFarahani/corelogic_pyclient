@@ -12,7 +12,7 @@ from authentication import Authentication
 class Search(Authentication):
 
     def __init__(self, country='au'):
-        # variations: search, property, places, Location
+        # Docs: https://developer.corelogic.asia/apis/docs/search-au
         super().__init__()
         self.base += f'/search/{country}'
 

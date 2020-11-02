@@ -12,7 +12,7 @@ from authentication import Authentication
 class Details(Authentication):
 
     def __init__(self, country='au'):
-        # variations: search, property, places, Location
+        # Docs: https://developer.corelogic.asia/apis/docs/property-details-au
         super().__init__()
         self.base += f'/property-details/{country}/properties'
 
