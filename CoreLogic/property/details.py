@@ -21,24 +21,34 @@ class Details(Authentication):
         """
         Description: the attributes of the property COMBINED core and additional attribtues
         pid: unique property id in corelogic 
-        returns: {
-                    "propertyType": "HOUSE",
-                    "propertySubType": "House",
-                    "beds": 4,
-                    "baths": 2,
-                    "carSpaces": 2,
-                    "lockUpGarages": 2,
-                    "landArea": 860,
-                    "isCalculatedLandArea": false,
-                    "landAreaSource": "VG"
-                    "airConditioned": true,
-                    "airConditioningFeatures": "Ducted Gas Heating",
-                    "ensuite": 1,
-                    "floorArea": 156,
-                    "roofMaterial": "Concrete Tile",
-                    "wallMaterial": "Brick Veneer",
-                    "yearBuilt": "1981"
-                } 
+        returns: {"baths": 0,
+                    "beds": 0,
+                    "carSpaces": 0,
+                    "isCalculatedLandArea": true,
+                    "landArea": 0,
+                    "landAreaSource": "string",
+                    "lockUpGarages": 0,
+                    "propertySubType": "string",
+                    "propertySubTypeShort": "string",
+                    "propertyType": "string"
+                    "airConditioned": false,
+                    "airConditioningFeatures": "string",
+                    "decadeBuilt": "string",
+                    "deck": "string",
+                    "ductedHeating": false,
+                    "ensuite": 0,
+                    "fireplace": false,
+                    "floorArea": 0,
+                    "pool": false,
+                    "roofMaterial": "string",
+                    "salesGroupId": 0,
+                    "salesGroupName": "string",
+                    "siteCover": 0,
+                    "solarPower": false,
+                    "tennisCourt": 0,
+                    "unitsOfUse": 0,
+                    "wallMaterial": "string",
+                    "yearBuilt": "string"} 
         """
         
         core_endpoint = f'/{pid}/attributes/core'
