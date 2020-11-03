@@ -70,7 +70,6 @@ class Suggest(Authentication):
 
         try:
             res = requests.get(url, params=params, headers=self.headers)
-            print("====== ", res, res.url)
             res = res.json()
         except HTTPError as err:
             return err
