@@ -63,6 +63,9 @@ class TestProperty(unittest.TestCase):
             valuation = v.consumer(pid)
             self.valuations[pid] = valuation['valution']
 
+    def suggest_props(self, add):
+        sugg = suggest.Suggest()
+        return sugg.suggest_properties(add, parcel=False)
 
 if __name__ == "__main__":
     t = TestProperty()

@@ -9,20 +9,20 @@ from authentication import Authentication
 
 
 class Suggest(Authentication):
-    def __init__(self, country='au', version='v2', properties=True):
+    def __init__(self, country='au', version='2', properties=True):
         super().__init__()
         self.version = version
-        
         self.base += f'/property/au' if properties else '/places/places'
 
 
     def suggest_properties(self, search, parcel=True,
-        stype="address, street, locality, postcode", 
+        stype="address,street,locality,postcode", 
         limit=10, 
-        units=True, 
-        bodycorp=True, 
+        units='TRUE', 
+        bodycorp='TRUE', 
         returnSuggest='datail'):
-        """Description: Gives a list of suggestions based on location (street, suburb, state, etc.) input.
+        """
+            Description: Gives a list of suggestions based on location (street, suburb, state, etc.) input.
             input: address, street (min 3 char), suburb or state (min 2 char). 
             suggestType: "address, street, locality, postcode, territorialAuthority, councilArea, state, country"
             Limit: number of suggestions returned (default 10)
@@ -50,29 +50,30 @@ class Suggest(Authentication):
             }
         """
 
-        # NOTE state abbreviation doesnt work (Contant corelogic)
-
-        endpoint = '/parcel/suggest.json' if parcel else f'v{self.version}/suggest.json'
+        endpoint = '/parcel/suggest.json' if parcel else f'/v{self.version}/suggest.json'
         url = self.base + endpoint
 
-        params = {
-            'q': search,
-            'limit': limit,
-            'units': units,
-            'bodycorp': bodycorp,
-            'returnSuggest': returnSuggest,
-        }
-        
-        if not parcel:
-            params['type'] = stype
+        # params = {
+        #     'q': search,
+        #     'limit': limit,
+        #     'includeUnits': units,
+        #     'includeBodyCorporates': bodycorp,
+        #     'returnSuggestion': returnSuggest,
+        #     }
+            
+        # if not parcel:
+        #     params['suggestionTypes'] = stype
+
+        # TODO detect non-default params 
+        params = {'q':search}
+
 
         try:
             res = requests.get(url, params=params, headers=self.headers)
+            print("====== ", res, res.url)
             res = res.json()
-
         except HTTPError as err:
             return err
-        
         return res
 
 
@@ -81,9 +82,3 @@ class Suggest(Authentication):
             Suggests places like schools based on filter options.
         """
         pass
-
-
-
-if __name__ == "__main__":
-    import sys
-    

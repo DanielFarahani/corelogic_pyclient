@@ -19,9 +19,9 @@ class Details(Authentication):
 
     def property_attributes(self, pid):
         """
-        Description: the attributes of the property COMBINED core and additional attribtues
-        pid: unique property id in corelogic 
-        returns: {"baths": 0,
+            Description: the attributes of the property COMBINED core and additional attribtues
+            pid: unique property id in corelogic 
+            returns: {"baths": 0,
                     "beds": 0,
                     "carSpaces": 0,
                     "isCalculatedLandArea": true,
