@@ -6,8 +6,8 @@ from datetime import datetime
 # https://developer.corelogic.asia/apis/docs/census-au-nz#/census/Census%20Summary%20service
 class Census(Authentication):
 
-    def __init__(self):
-        super().__init__(False)
+    def __init__(self, env=""):
+        super().__init__(config=env)
         self.base += "/statistics"
 
 

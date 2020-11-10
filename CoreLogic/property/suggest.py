@@ -9,8 +9,8 @@ from authentication import Authentication
 
 
 class Suggest(Authentication):
-    def __init__(self, country='au', version='2', properties=True):
-        super().__init__()
+    def __init__(self, country='au', version='2', properties=True, env=""):
+        super().__init__(config=env)
         self.version = version
         self.base += f'/property/au' if properties else '/places/places'
 

@@ -7,8 +7,8 @@ from datetime import datetime
 
 class Valuations(Authentication):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, env=""):
+        super().__init__(config=env)
         # website: self.base += "avm/au/properties/2/avm/intellival/origination/current"
         # postman: self.base += /property//au/v1/property/avm.json	
 

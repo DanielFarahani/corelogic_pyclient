@@ -3,6 +3,7 @@ import requests
 class healthcheck:
 
     def __init__(self):
+        # TOOD fix the url routing
         self.url = "https://api-uat.corelogic.asia/sandbox/" 
         self.description = { "GREEN": "Available and normal.", "BLUE": "Going through the release process.", 
         "AMBER": "Partially stable." ,"RED": "Not available."}
@@ -51,8 +52,3 @@ class healthcheck:
             return error
         return state, response
 
-
-
-if __name__ == "__main__":
-    hc = healthcheck()
-    print(hc.healthcheck_property())

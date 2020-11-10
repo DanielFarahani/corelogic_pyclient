@@ -6,13 +6,13 @@ import os
 
 class Authentication(object):
 
-    def __init__(self, dev=True):
+    def __init__(self, **kwargs):
         # prod (api), test (api-uat), dev (+ /sandbox)
-        self.prod = "https://api.corelogic.asia"
-        self.test = "https://api-uat.corelogic.asia"
-        self.dev = "https://api-uat.corelogic.asia/sandbox"
+        env = {'prod' : "https://api.corelogic.asia",
+                'test' : "https://api-uat.corelogic.asia",
+                'dev' : "https://api-uat.corelogic.asia/sandbox",}
         
-        self.base = self.dev if dev else self.test 
+        self.base = env[kwargs['config']] if kwargs['config'] else env['dev']
         self.auth = "https://access-api.corelogic.asia"
 
         client_id = os.environ['client_id']
@@ -22,22 +22,18 @@ class Authentication(object):
         self.headers = {'Content-Type': 'application/json', \
                         'Authorization' : self.access_token}
 
+
     # Generate Authentication token
     def generate_token(self, cid, secret):
-        endpoint = self.auth + '/access/oauth/token'
+        url = self.auth + '/access/oauth/token'
         try:
-            params = {'grant_type': 'client_credentials', \
-                        'client_id': cid, 'client_secret': secret}
+            params = {'grant_type': 'client_credentials', 'client_id': cid, \
+                        'client_secret': secret}
 
-            result = requests.get(endpoint, params=params)
+            result = requests.get(url, params=params)
             token = result.json()['access_token']
 
         except HTTPError as err:
             print(f'HTTP error occurred: {err}')
 
         return token
-
-
-
-if __name__ == "__main__":
-    a = Authentication()

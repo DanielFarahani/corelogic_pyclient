@@ -11,9 +11,9 @@ from authentication import Authentication
 
 class Search(Authentication):
 
-    def __init__(self, country='au'):
+    def __init__(self, country='au', env=""):
         # Docs: https://developer.corelogic.asia/apis/docs/search-au
-        super().__init__()
+        super().__init__(config=env)
         self.base += f'/search/{country}'
 
 
