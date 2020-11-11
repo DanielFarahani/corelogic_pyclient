@@ -10,21 +10,27 @@ I haven't seen any clients/ wrappers for Python, so this is a start.
 
 ## Usage
 
-Install requirements  
+1. Install requirements  
 `pip3 install -r requirements.txt`
 
-[] create an account on [coreLogic developer](https://developer.corelogic.asia/user)  
-[] add **Client ID** and **Secret** to enviroment variable
+2. create an account on [coreLogic developer](https://developer.corelogic.asia/user)  
+3. add **Client ID** and **Secret** to enviroment variable
 ```
-#!/bin/bash
 #E.g. setup.sh (Then chmod +x setup.sh)
+#!/bin/bash
 client_id='<Your Client_id>'
 secret='<Your secret_code>'
 ```
-
-The structure of the package is similar to the Postman [collection provided](https://documenter.getpostman.com/view/7051651/S1EJWfxt) by CoreLogic.
+```
+#or export in the terminal
+export client_id='<Your Client_id>'
+export secret='<Your secret_code>'
+```
 
 ### Endpoints
+
+The structure of the package is similar to the Postman [collection provided](https://documenter.getpostman.com/view/7051651/S1EJWfxt) by CoreLogic.  
+You can import class/folder of the API separately and use the endpoint through the methods.
 
 * Suggestion
 * Search
