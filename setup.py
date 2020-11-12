@@ -14,7 +14,7 @@ setup(name="corelogic_pyclient",
       author_email="danfarahani@gmail.com",
       license="MIT",
       packages=find_packages(exclude=["test_*.*", "sandbox_*.json", "clistart.sh"]),
-      install_requires=['click']
+      install_requires=['click'],
       include_package_data=True,
       zip_safe=True,
       )
