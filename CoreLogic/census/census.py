@@ -1,9 +1,8 @@
-from authentication import Authentication
+from ..authentication import Authentication
 import requests
 from requests.exceptions import HTTPError
 from datetime import datetime
 
-# https://developer.corelogic.asia/apis/docs/census-au-nz#/census/Census%20Summary%20service
 class Census(Authentication):
 
     def __init__(self, env=""):

@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
-setup(name="corelogic_pyclient",
-      version="0.1.0",
+setup(name="pycorelogic",
+      version="0.1.1",
       description="CoreLogic API Wrapper for interacting with CoreLogic (Property Data Reports & Analytics)",
       url="https://github.com/danielfarahani/corelogic_pyclient",
       classifiers=[

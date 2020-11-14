@@ -9,3 +9,6 @@ endpoints.txt
 TODO
 sandbox_data.json
 clistart.sh
+build
+*.egg-info
+dist

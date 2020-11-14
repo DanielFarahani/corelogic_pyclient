@@ -1,9 +1,7 @@
-from authentication import Authentication
 import requests
 from requests.exceptions import HTTPError
 from datetime import datetime
-
-
+from ..authentication import Authentication
 
 class Valuations(Authentication):
 
