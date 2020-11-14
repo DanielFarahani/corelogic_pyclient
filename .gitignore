@@ -12,3 +12,5 @@ clistart.sh
 build
 *.egg-info
 dist
+package.sh
+package*.sh

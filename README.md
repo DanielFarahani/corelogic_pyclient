@@ -7,25 +7,41 @@ Makes interfacing with the API much easier.
 
 I haven't seen any clients/ wrappers for Python, so this is a start. 
 
-
-## Usage
-
-1. Install requirements  
-`pip3 install -r requirements.txt`
-
-2. create an account on [coreLogic developer](https://developer.corelogic.asia/user)  
-3. add **Client ID** and **Secret** to enviroment variable
+## install
+```bash
+pip3 install corelogic-pyclient
+OR
+pip install corelogic-pyclient
 ```
-#E.g. setup.sh (Then chmod +x setup.sh)
+
+## Usage 
+1. create an account on [developer.corelogic](https://developer.corelogic.asia/user) for a API credentials
+2. add **Client ID** and **Secret** to enviroment variable  
+> bash script to run everytime
+```bash
+#E.g. create setup.sh (Then chmod +x setup.sh)
 #!/bin/bash
 client_id='<Your Client_id>'
 secret='<Your secret_code>'
 ```
-```
+> OR manual process
+```bash
 #or export in the terminal
 export client_id='<Your Client_id>'
 export secret='<Your secret_code>'
 ```
+3. Import
+```python
+>>> import corelogic.property as prop
+>>> details = prop.Details()
+>>> details.property_attributes(<property_id>)
+{'beds': 2, 'baths': 1, ...}
+
+>>> suggestions = prop.Suggest()
+>>> suggestions.suggest_properties('1 ahern place monash')
+```
+
+
 
 ### Endpoints
 
