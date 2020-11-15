@@ -1,6 +1,5 @@
 from ..authentication import Authentication
 import requests
-from requests.exceptions import HTTPError
 from datetime import datetime
 
 class Census(Authentication):

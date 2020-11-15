@@ -14,3 +14,4 @@ build
 dist
 package.sh
 package*.sh
+zTools/
